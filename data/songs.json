@@ -1,0 +1,100 @@
+{
+	"songs": [
+		{
+			"artist": "The Beatles",
+			"artistSlug": "the-beatles",
+			"title": "Hello World",
+			"slug": "hello-world",
+			"sections": [
+				{
+					"name": "verse",
+					"chords": [
+						[
+							{
+								"note": "1",
+								"mod": "minor"
+							},
+							{
+								"note": "5",
+								"mod": ""
+							},
+							{
+								"note": "6",
+								"mod": ""
+							},
+							{
+								"note": "4",
+								"mod": ""
+							}
+						],
+						[
+							{
+								"note": "1",
+								"mod": "minor"
+							},
+							{
+								"note": "5",
+								"mod": ""
+							},
+							{
+								"note": "6",
+								"mod": ""
+							},
+							{
+								"note": "4",
+								"mod": ""
+							}
+						]
+					],
+					"lyrics": ["Hello world", "How are you today?"]
+				},
+				{
+					"name": "chorus",
+					"chords": [
+						[
+							{
+								"note": "4",
+								"mod": ""
+							},
+							{
+								"note": "5",
+								"mod": ""
+							},
+							{
+								"note": "1",
+								"mod": ""
+							},
+							{
+								"note": "1",
+								"mod": ""
+							}
+						],
+						[
+							{
+								"note": "4",
+								"mod": ""
+							},
+							{
+								"note": "5",
+								"mod": ""
+							},
+							{
+								"note": "1",
+								"mod": ""
+							},
+							{
+								"note": "1",
+								"mod": ""
+							},
+							{
+								"note": "1",
+								"mod": ""
+							}
+						]
+					],
+					"lyrics": ["Goodbye goodbye", "I'll see you another day"]
+				}
+			]
+		}
+	]
+}
