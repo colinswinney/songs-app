@@ -1,6 +1,5 @@
-import { H2 } from "@expo/html-elements";
-
-import Main from "../../../components/Main";
+import H2 from "@/components/HTML/H2";
+import Main from "@/components/HTML/Main";
 
 export default function ArtistsIndex() {
 	return (

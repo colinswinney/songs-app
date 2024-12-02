@@ -1,8 +1,7 @@
 import { Link, Tabs } from "expo-router";
-import { Text } from "react-native";
-import { H2, P } from "@expo/html-elements";
-
-import Main from "../../components/Main";
+import H2 from "@/components/HTML/H2";
+import Main from "@/components/HTML/Main";
+import P from "@/components/HTML/P";
 
 export default function NotFound() {
 	return (
@@ -11,9 +10,7 @@ export default function NotFound() {
 			<Main>
 				<H2>This screen doesn't exist.</H2>
 				<P>
-					<Link href="/">
-						<Text>Go to home screen!</Text>
-					</Link>
+					<Link href="/">Go to home screen!</Link>
 				</P>
 			</Main>
 		</>
