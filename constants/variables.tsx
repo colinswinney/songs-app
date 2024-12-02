@@ -1,6 +1,7 @@
 export const COLOR = {
 	black: `#000`,
 	white: `#fcfbfa`,
+	whiteA70: `rgba(255, 255, 255, 0.7)`,
 	primary: `rebeccapurple`,
 	primaryDark: `#3b246b`,
 	primaryLight: `#c6aaff`,

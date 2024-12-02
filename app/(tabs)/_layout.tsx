@@ -1,6 +1,7 @@
 import { Tabs } from "expo-router";
 import React from "react";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { COLOR } from "@/constants/variables";
 
 export default function TabLayout() {
 	return (
@@ -9,12 +10,12 @@ export default function TabLayout() {
 				headerTintColor: "white",
 				headerShown: true,
 				headerStyle: {
-					backgroundColor: "rebeccapurple",
+					backgroundColor: COLOR.primaryDark,
 				},
-				tabBarActiveTintColor: "white",
-				tabBarInactiveTintColor: "#ccc",
+				tabBarActiveTintColor: COLOR.white,
+				tabBarInactiveTintColor: COLOR.whiteA70,
 				tabBarStyle: {
-					backgroundColor: "rebeccapurple",
+					backgroundColor: COLOR.primary,
 				},
 			}}
 		>
