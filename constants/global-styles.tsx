@@ -39,7 +39,8 @@ export default StyleSheet.create({
 	p: {
 		fontSize: 19,
 		fontWeight: "300",
-		marginBlock: 0,
+		marginBlockEnd: 16,
+		marginBlockStart: 0,
 	},
 	safeAreaView: {
 		backgroundColor: COLOR.white,
