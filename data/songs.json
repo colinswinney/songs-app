@@ -1,8 +1,15 @@
 {
+	"artists": [
+		{
+			"id": 1,
+			"name": "The Beatles",
+			"slug": "the-beatles"
+		}
+	],
 	"songs": [
 		{
-			"artist": "The Beatles",
-			"artistSlug": "the-beatles",
+			"id": 2,
+			"artist_id": 1,
 			"title": "Hello World",
 			"slug": "hello-world",
 			"sections": [
@@ -93,6 +100,30 @@
 						]
 					],
 					"lyrics": ["Goodbye goodbye", "I'll see you another day"]
+				},
+				{
+					"name": "solo",
+					"chords": [
+						[
+							{
+								"note": "4",
+								"mod": ""
+							},
+							{
+								"note": "5",
+								"mod": ""
+							},
+							{
+								"note": "1",
+								"mod": ""
+							},
+							{
+								"note": "1",
+								"mod": ""
+							}
+						]
+					],
+					"lyrics": [""]
 				}
 			]
 		}
