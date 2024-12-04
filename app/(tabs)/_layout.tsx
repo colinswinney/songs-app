@@ -60,6 +60,19 @@ export default function TabLayout() {
 				}}
 			/>
 			<Tabs.Screen
+				name="settings/index"
+				options={{
+					title: "Settings",
+					tabBarIcon: ({ color, focused, size }) => (
+						<Ionicons
+							name={focused ? "cog" : "cog-outline"}
+							color={color}
+							size={size}
+						/>
+					),
+				}}
+			/>
+			<Tabs.Screen
 				name="artists/[slug]"
 				options={{
 					href: null,
@@ -69,6 +82,13 @@ export default function TabLayout() {
 				name="songs/[slug]"
 				options={{
 					href: null,
+				}}
+			/>
+			<Tabs.Screen
+				name="settings/create-song"
+				options={{
+					href: null,
+					title: "Create song",
 				}}
 			/>
 		</Tabs>
