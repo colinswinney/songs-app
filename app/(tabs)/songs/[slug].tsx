@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import { BR, Span } from "@expo/html-elements";
 import { Tabs, useLocalSearchParams } from "expo-router";
 import SONG_DATA from "@/data/songs.json";
@@ -23,8 +24,8 @@ export default function SongsSlug() {
 			<Main>
 				<H2>{song.title}</H2>
 				{song.sections.map((section, index) => (
-					<>
-						<H3 key={index}>
+					<Fragment key={index}>
+						<H3>
 							{section.name}
 						</H3>
 						{section.lyrics.map((lyric, index) => (
@@ -42,7 +43,7 @@ export default function SongsSlug() {
 								))}
 							</P>
 						))}
-					</>
+					</Fragment>
 				))}
 			</Main>
 		</>
