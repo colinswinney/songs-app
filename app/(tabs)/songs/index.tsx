@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import { UL, LI } from "@expo/html-elements";
 import { Link } from "expo-router";
-import SONG_DATA from "@/data/songs.json";
+import SONG_DATA from "@/data/data.json";
 import Main from "@/components/HTML/Main";
 
 type Song = {

@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import { BR, Span } from "@expo/html-elements";
 import { Tabs, useLocalSearchParams } from "expo-router";
-import SONG_DATA from "@/data/songs.json";
+import SONG_DATA from "@/data/data.json";
 import H2 from "@/components/HTML/H2";
 import H3 from "@/components/HTML/H3";
 import Main from "@/components/HTML/Main";
