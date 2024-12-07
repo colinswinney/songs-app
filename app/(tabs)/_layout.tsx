@@ -76,12 +76,14 @@ export default function TabLayout() {
 				name="artists/[slug]"
 				options={{
 					href: null,
+					title: "",
 				}}
 			/>
 			<Tabs.Screen
 				name="songs/[slug]"
 				options={{
 					href: null,
+					title: "",
 				}}
 			/>
 			<Tabs.Screen
