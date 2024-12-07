@@ -1,16 +1,27 @@
-import { Fragment } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { UL, LI } from "@expo/html-elements";
 import { Link } from "expo-router";
-import SONG_DATA from "@/data/data.json";
+import { supabase } from "@/supabaseClient";
 import Main from "@/components/HTML/Main";
-
-type Song = {
-	slug: string;
-	title: string;
-};
+import { COLOR } from "@/constants/variables";
+import { Song } from "@/types";
 
 export default function SongsIndex() {
-	const { songs } = SONG_DATA;
+
+	const [songs, setSongs] = useState<Song[]>([]);
+
+	useEffect(() => {
+		setSongsViaSupabase();
+	}, []);
+
+	async function setSongsViaSupabase() {
+
+		const { data } = await supabase.from("songs").select();
+
+		if (data !== null) {
+			setSongs(data);
+		}
+	}
 
 	if (!songs) {
 		return null;
@@ -27,6 +38,7 @@ export default function SongsIndex() {
 							slug: song.slug,
 						},
 					}}
+					style={{ fontSize: 24, color: COLOR.primary }}
 				>
 					{song.title}
 				</Link>
