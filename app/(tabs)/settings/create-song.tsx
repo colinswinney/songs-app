@@ -45,18 +45,19 @@ export default function SongsIndex() {
 	const [addNewArtist, setAddNewArtist] = useState<string | null>(null);
 	const [displayAddNewArtist, setDisplayAddNewArtist] = useState<boolean>(true);
 
+	async function fetchArtists() {
+		const artistsData: Artist[] = await getArtists();
+		artistsData.sort((a, b) => b.title.localeCompare(a.title));
+		setArtists(artistsData);
+	}
+
 	useEffect(() => {
-		async function fetchArtists() {
-			const artistsData: Artist[] = await getArtists();
-			artistsData.sort((a, b) => b.title.localeCompare(a.title));
-			setArtists(artistsData);
-		}
 		fetchArtists();
 	}, []);
 
 	useEffect(() => {
 		setNewSong({
-			artist_id: artist?.id ? artist.id : null,
+			artist_ids: artist?.id ? [artist.id] : null,
 			original_key: originalKey,
 			slug: slugify(title),
 			title: title,
@@ -64,7 +65,19 @@ export default function SongsIndex() {
 		});
 	}, [artist, originalKey, title, sections]);
 
-	console.log(newSong);
+	useEffect(() => {
+		console.log("artists", artists);
+
+		const ueArtist: Artist | null =
+			artists.find((artist) => artist.title === addNewArtist) || null;
+
+		console.log("ueArtist", ueArtist);
+		if (ueArtist) {
+			setArtist(ueArtist);
+			setAddNewArtist(null);
+		}
+
+	}, [artists, addNewArtist]);
 
 	async function addArtistToSupabase(newArtist: Artist) {
 		if (!addNewArtist) {
@@ -80,7 +93,7 @@ export default function SongsIndex() {
 
 		if (!error) {
 			alert("Success", "Artist created successfully!");
-			setAddNewArtist(null);
+			fetchArtists();
 		}
 	}
 

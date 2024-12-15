@@ -38,7 +38,7 @@ export type Artist= {
 }
 
 export type Song = {
-	artist_id: string | null;
+	artist_ids: string[] | null;
 	original_key?: "" | SongKey;
 	sections: {
 		section_id: string;
