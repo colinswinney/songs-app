@@ -34,7 +34,10 @@ export default StyleSheet.create({
 		fontSize: 19,
 	},
 	main: {
+		marginInline: "auto",
+		maxWidth: 1280,
 		padding: SIZE[16],
+		width: '100%'
 	},
 	p: {
 		fontSize: 19,

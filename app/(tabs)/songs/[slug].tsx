@@ -1,7 +1,6 @@
 import { Fragment, useEffect, useState } from "react";
 import { BR, Span } from "@expo/html-elements";
 import { Tabs, useLocalSearchParams } from "expo-router";
-
 import { supabase } from "@/supabaseClient";
 import H2 from "@/components/HTML/H2";
 import H3 from "@/components/HTML/H3";
@@ -43,11 +42,18 @@ export default function SongsSlug() {
 		}
 	}
 
+	if (slug !== song?.slug) {
+		return;
+	}
+
 	if (isLoading) {
 		return (
-			<Main>
-				<P>Loading...</P>
-			</Main>
+			<Fragment>
+				<Tabs.Screen options={{ title: "" }} />
+				<Main>
+					<P>Loading...</P>
+				</Main>
+			</Fragment>
 		);
 	}
 
@@ -56,7 +62,7 @@ export default function SongsSlug() {
 	}
 
 	return (
-		<>
+		<Fragment>
 			<Tabs.Screen options={{ title: song.title }} />
 			<Main>
 				<H2>{song.title}</H2>
@@ -83,6 +89,6 @@ export default function SongsSlug() {
 					</Fragment>
 				))}
 			</Main>
-		</>
+		</Fragment>
 	);
 }

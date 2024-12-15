@@ -1,39 +1,33 @@
+import { useState, useEffect } from "react";
+import { supabaseAuth as supabase } from "@/supabaseClient";
+import Auth from "@/components/Auth";
+import Account from "@/components/Account";
+import { View } from "react-native";
+import { Session } from "@supabase/supabase-js";
 import Main from "@/components/HTML/Main";
-import H1 from "@/components/HTML/H1";
-import H2 from "@/components/HTML/H2";
-import H3 from "@/components/HTML/H3";
-import H4 from "@/components/HTML/H4";
-import H5 from "@/components/HTML/H5";
-import H6 from "@/components/HTML/H6";
-import P from "@/components/HTML/P";
 
 export default function Index() {
+	const [session, setSession] = useState<Session | null>(null);
+
+	useEffect(() => {
+		supabase.auth.getSession().then(({ data: { session } }) => {
+			setSession(session);
+		});
+
+		supabase.auth.onAuthStateChange((_event, session) => {
+			setSession(session);
+		});
+	}, []);
+
 	return (
 		<Main>
-			<H1>Lorem ipsum dolor sit amet</H1>
-			<H2>Lorem ipsum dolor sit amet</H2>
-			<H3>Lorem ipsum dolor sit amet</H3>
-			<H4>Lorem ipsum dolor sit amet</H4>
-			<H5>Lorem ipsum dolor sit amet</H5>
-			<H6>Lorem ipsum dolor sit amet</H6>
-			<P>
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis
-				deserunt ex odio explicabo, veniam praesentium in quis cum nihil soluta?
-				Voluptatibus ex tempore molestiae iusto necessitatibus quaerat, quis
-				deleniti veritatis?
-			</P>
-			<P>
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis
-				deserunt ex odio explicabo, veniam praesentium in quis cum nihil soluta?
-				Voluptatibus ex tempore molestiae iusto necessitatibus quaerat, quis
-				deleniti veritatis?
-			</P>
-			<P>
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis
-				deserunt ex odio explicabo, veniam praesentium in quis cum nihil soluta?
-				Voluptatibus ex tempore molestiae iusto necessitatibus quaerat, quis
-				deleniti veritatis?
-			</P>
+			<View>
+				{session && session.user ? (
+					<Account key={session.user.id} session={session} />
+				) : (
+					<Auth />
+				)}
+			</View>
 		</Main>
 	);
 }
