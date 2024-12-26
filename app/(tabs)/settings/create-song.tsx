@@ -2,8 +2,9 @@ import { Text, View } from "react-native";
 import { useEffect, useState } from "react";
 import uuid from "react-native-uuid";
 import { Picker } from "@react-native-picker/picker";
-import { Button, Input } from "@rneui/themed";
+import { Button } from "@rneui/themed";
 import Main from "@/components/HTML/Main";
+import Input from "@/components/HTML/Input";
 import Section from "@/components/Song/Section";
 import { Artist, Song, SongKey, SongSectionName } from "@/types";
 import { slugify } from "@/helpers/slugify";
@@ -66,15 +67,14 @@ export default function SongsIndex() {
 	}, [artist, originalKey, title, sections]);
 
 	useEffect(() => {
-		console.log("artists", artists);
 
 		const ueArtist: Artist | null =
 			artists.find((artist) => artist.title === addNewArtist) || null;
 
-		console.log("ueArtist", ueArtist);
 		if (ueArtist) {
 			setArtist(ueArtist);
 			setAddNewArtist(null);
+			setDisplayAddNewArtist(false);
 		}
 
 	}, [artists, addNewArtist]);
@@ -116,90 +116,86 @@ export default function SongsIndex() {
 
 	return (
 		<Main>
-			<Input
-				label="Title"
-				onChangeText={(value) => setTitle(value)}
-				value={title}
-				autoCapitalize={"none"}
-				inputContainerStyle={{
-					borderWidth: 1,
-				}}
-				containerStyle={{
-					paddingInline: 0,
-				}}
-			/>
-			<Text>Artist</Text>
-			<Picker
-				selectedValue={artist?.slug}
-				onValueChange={(value) => {
-					if (value === "add-new") {
-						setDisplayAddNewArtist(true);
-						setArtist(null);
-						return;
-					}
-					const selectedArtist =
-						artists.find((artist) => artist.slug === value) || null;
-					setDisplayAddNewArtist(false);
-					setArtist(selectedArtist);
-				}}
-				style={{
-					height: 40,
-					marginBlockEnd: 20,
-				}}
-			>
-				<Picker.Item label="Add New" value="add-new" />
-				{artists.map((artist) => (
-					<Picker.Item
-						key={artist.slug}
-						label={artist.title}
-						value={artist.slug}
-					/>
-				))}
-			</Picker>
-			{displayAddNewArtist && (
-				<View
-					style={{
-						alignItems: "center",
-						display: "flex",
-						flexDirection: "row",
-					}}
-				>
+			<View style={{ display: "flex", flexDirection: "column", flexWrap: "wrap", gap: '5%' }}>
+				<View style={{ flexBasis: "47.5%", flexGrow: 1, flexShrink: 0 }}>
 					<Input
-						label="Add New Artist"
-						onChangeText={(value) => setAddNewArtist(value)}
-						value={addNewArtist || ""}
-						autoCapitalize={"none"}
-						inputContainerStyle={{
-							borderWidth: 1,
-						}}
-						containerStyle={{
-							paddingInline: 0,
-							flexShrink: 1,
-						}}
+						label="Title"
+						onChangeText={(value: string) => setTitle(value)}
+						value={title}
 					/>
-					<Button
-						title="+"
-						onPress={() => {
-							addNewArtist && addArtistToSupabase({
-								title: addNewArtist || "",
-								slug: slugify(addNewArtist || ""),
-							} as Artist);
+
+					<Text>Song Key</Text>
+					<Picker
+						selectedValue={originalKey}
+						onValueChange={(value) => setOriginalKey(value)}
+						style={{
+							height: 40,
+							marginBlockEnd: 20,
 						}}
-					/>
+					>
+						{SongKey &&
+							Object.values(SongKey).map((key) => (
+								<Picker.Item key={key} label={key} value={key} />
+							))}
+					</Picker>
 				</View>
-			)}
-			<Picker
-				selectedValue={originalKey}
-				onValueChange={(value) => setOriginalKey(value)}
-				style={{
-					height: 40,
-					marginBlockEnd: 20,
-				}}
-			>
-				{SongKey && Object.values(SongKey).map((key) => (
-					<Picker.Item key={key} label={key} value={key} />
-				))}
-			</Picker>
+				<View style={{ flexBasis: "47.5%", flexGrow: 1, flexShrink: 0 }}>
+					<Text>Artist</Text>
+					<Picker
+						selectedValue={artist?.slug}
+						onValueChange={(value) => {
+							if (value === "add-new") {
+								setDisplayAddNewArtist(true);
+								setArtist(null);
+								return;
+							}
+							const selectedArtist =
+								artists.find((artist) => artist.slug === value) || null;
+							setDisplayAddNewArtist(false);
+							setArtist(selectedArtist);
+						}}
+						style={{
+							height: 40,
+							marginBlockEnd: 20,
+						}}
+					>
+						<Picker.Item label="Add New" value="add-new" />
+						{artists.map((artist) => (
+							<Picker.Item
+								key={artist.slug}
+								label={artist.title}
+								value={artist.slug}
+							/>
+						))}
+					</Picker>
+					{displayAddNewArtist && (
+						<View
+							style={{
+								alignItems: "center",
+								display: "flex",
+								flexDirection: "row",
+							}}
+						>
+							<Input
+								label="Add New Artist"
+								onChangeText={(value: string) => setAddNewArtist(value)}
+								value={addNewArtist || ""}
+							/>
+							<Button
+								disabled={!addNewArtist}
+								title="+"
+								onPress={() => {
+									addNewArtist &&
+										addArtistToSupabase({
+											title: addNewArtist || "",
+											slug: slugify(addNewArtist || ""),
+										} as Artist);
+								}}
+							/>
+						</View>
+					)}
+				</View>
+			</View>
 			{sections.map((section) => (
 				<Section
 					key={section.section_id}
@@ -214,8 +210,12 @@ export default function SongsIndex() {
 					const newSection: Song["sections"][0] = {
 						section_id: uuid.v4() as string,
 						name: SongSectionName.Verse,
-						lyrics: [],
-						chords: [[{ note: "C" }]],
+						lines: [
+							{
+								lyrics: "",
+								chords: [{ note: "C" }],
+							},
+						],
 					};
 					setSections([...sections, newSection]);
 				}}

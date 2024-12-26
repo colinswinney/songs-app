@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Alert, StyleSheet, View, AppState } from "react-native";
 import { supabase } from "@/supabaseClient";
-import { Button, Input } from "@rneui/themed";
+import { Button } from "@rneui/themed";
+import Input from "@/components/HTML/Input";
 
 // Tells Supabase Auth to continuously refresh the session automatically if
 // the app is in the foreground. When this is added, you will continue to receive
@@ -52,22 +53,18 @@ export default function Auth() {
 			<View style={[styles.verticallySpaced, styles.mt20]}>
 				<Input
 					label="Email"
-					leftIcon={{ type: "font-awesome", name: "envelope" }}
-					onChangeText={(text) => setEmail(text)}
+					rightIcon={{ type: "font-awesome", name: "envelope" }}
+					onChangeText={(text: string) => setEmail(text)}
 					value={email}
-					placeholder="email@address.com"
-					autoCapitalize={"none"}
 				/>
 			</View>
 			<View style={styles.verticallySpaced}>
 				<Input
 					label="Password"
-					leftIcon={{ type: "font-awesome", name: "lock" }}
-					onChangeText={(text) => setPassword(text)}
+					rightIcon={{ type: "font-awesome", name: "lock" }}
+					onChangeText={(text: string) => setPassword(text)}
 					value={password}
 					secureTextEntry={true}
-					placeholder="Password"
-					autoCapitalize={"none"}
 				/>
 			</View>
 			<View style={[styles.verticallySpaced, styles.mt20]}>

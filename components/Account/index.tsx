@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { supabase } from "@/supabaseClient";
 import { StyleSheet, View, Alert } from "react-native";
-import { Button, Input } from "@rneui/themed";
+import { Button } from "@rneui/themed";
+import Input from "@/components/HTML/Input";
 import { Session } from "@supabase/supabase-js";
 
 export default function Account({ session }: { session: Session }) {
@@ -76,7 +77,7 @@ export default function Account({ session }: { session: Session }) {
 				<Input
 					label="Username"
 					value={username || ""}
-					onChangeText={(text) => setUsername(text)}
+					onChangeText={(text: string) => setUsername(text)}
 				/>
 			</View>
 

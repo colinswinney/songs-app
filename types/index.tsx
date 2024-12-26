@@ -3,18 +3,21 @@
  */
 
 export enum SongKey {
-	A = "A",
 	AFlat = "Ab",
+	A = "A",
 	ASharp = "A#",
 	BFlat = "Bb",
 	B = "B",
 	C = "C",
 	CSharp = "C#",
+	DFlat = "Db",
 	D = "D",
 	DSharp = "D#",
+	EFlat = "Eb",
 	E = "E",
 	F = "F",
 	FSharp = "F#",
+	GFlat = "Gb",
 	G = "G",
 	GSharp = "G#",
 }
@@ -43,10 +46,12 @@ export type Song = {
 	sections: {
 		section_id: string;
 		name: SongSectionName;
-		lyrics: string[];
-		chords: {
-			note: string;
-		}[][];
+		lines: {
+			lyrics: string;
+			chords: {
+				note: string;
+			}[];
+		}[];
 	}[];
 	slug: string;
 	title: string;

@@ -71,15 +71,15 @@ export default function SongsSlug() {
 						<H3>
 							{section.name}
 						</H3>
-						{section.lyrics.map((lyric, index) => (
+						{section.lines.map((line, index) => (
 							<P key={index}>
-								{lyric}
+								{line.lyrics}
 							</P>
 						))}
 						<BR />
-						{section.chords.map((line, index) => (
+						{section.lines.map((line, index) => (
 							<P key={index}>
-								{line.map((chord, index) => (
+								{line.chords.map((chord, index) => (
 									<Span key={index}>
 										{chord.note}
 									</Span>

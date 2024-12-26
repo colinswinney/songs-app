@@ -3,6 +3,7 @@ import uuid from "react-native-uuid";
 import { Picker } from '@react-native-picker/picker';
 import { Song, SongSectionName } from '@/types';
 import Toolbar from '@/components/Song/Toolbar';
+import Line from '@/components/Song/Line';
 import React from "react";
 
 export default function SongSection({
@@ -89,6 +90,8 @@ export default function SongSection({
 				<Picker.Item label={SongSectionName.Outro} value="outro" />
 				<Picker.Item label={SongSectionName.Misc} value="misc" />
 			</Picker>
+
+			<Line/>
 
 			<Text>{section.section_id}</Text>
 
