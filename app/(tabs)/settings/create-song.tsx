@@ -1,10 +1,10 @@
 import { Text, View } from "react-native";
 import { useEffect, useState } from "react";
 import uuid from "react-native-uuid";
-import { Picker } from "@react-native-picker/picker";
 import { Button } from "@rneui/themed";
 import Main from "@/components/HTML/Main";
 import Input from "@/components/HTML/Input";
+import Select from "@/components/HTML/Select";
 import Section from "@/components/Song/Section";
 import { Artist, Song, SongKey, SongSectionName } from "@/types";
 import { slugify } from "@/helpers/slugify";
@@ -116,7 +116,14 @@ export default function SongsIndex() {
 
 	return (
 		<Main>
-			<View style={{ display: "flex", flexDirection: "column", flexWrap: "wrap", gap: '5%' }}>
+			<View
+				style={{
+					display: "flex",
+					flexDirection: "column",
+					flexWrap: "wrap",
+					gap: "5%",
+				}}
+			>
 				<View style={{ flexBasis: "47.5%", flexGrow: 1, flexShrink: 0 }}>
 					<Input
 						label="Title"
@@ -125,23 +132,22 @@ export default function SongsIndex() {
 					/>
 
 					<Text>Song Key</Text>
-					<Picker
+					<Select
 						selectedValue={originalKey}
-						onValueChange={(value) => setOriginalKey(value)}
+						onValueChange={(value) => setOriginalKey(value as SongKey)}
 						style={{
-							height: 40,
+							height: 60,
 							marginBlockEnd: 20,
 						}}
-					>
-						{SongKey &&
-							Object.values(SongKey).map((key) => (
-								<Picker.Item key={key} label={key} value={key} />
-							))}
-					</Picker>
+						options={Object.values(SongKey).map((value) => ({
+							label: value,
+							value: value,
+						}))}
+					/>
 				</View>
 				<View style={{ flexBasis: "47.5%", flexGrow: 1, flexShrink: 0 }}>
 					<Text>Artist</Text>
-					<Picker
+					<Select
 						selectedValue={artist?.slug}
 						onValueChange={(value) => {
 							if (value === "add-new") {
@@ -158,16 +164,14 @@ export default function SongsIndex() {
 							height: 40,
 							marginBlockEnd: 20,
 						}}
-					>
-						<Picker.Item label="Add New" value="add-new" />
-						{artists.map((artist) => (
-							<Picker.Item
-								key={artist.slug}
-								label={artist.title}
-								value={artist.slug}
-							/>
-						))}
-					</Picker>
+						options={[
+							{ label: "Add New", value: "add-new" },
+							...artists.map((artist) => ({
+								label: artist.title,
+								value: artist.slug,
+							})),
+						]}
+					/>
 					{displayAddNewArtist && (
 						<View
 							style={{

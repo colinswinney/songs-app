@@ -1,8 +1,8 @@
-import { Input as Input_REUNI } from "@rneui/themed";
+import { Input as REUNI_Input, InputProps } from "@rneui/themed";
 
-export default function Input(props: any) {
+export default function Input(props: InputProps) {
 	return (
-		<Input_REUNI
+		<REUNI_Input
 			containerStyle={{
 				paddingInline: 0,
 			}}

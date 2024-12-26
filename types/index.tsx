@@ -23,15 +23,15 @@ export enum SongKey {
 }
 
 export enum SongSectionName {
-	Blank = "",
+	Intro = "intro",
 	Verse = "verse",
+	PreChorus = "pre-chorus",
 	Chorus = "chorus",
 	Bridge = "bridge",
-	PreChorus = "pre-chorus",
-	Outro = "outro",
-	Intro = "intro",
 	Solo = "solo",
+	Outro = "outro",
 	Misc = "misc",
+	Blank = "",
 }
 
 export type Artist= {

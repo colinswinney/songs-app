@@ -1,9 +1,9 @@
 import { View, Text, StyleSheet } from 'react-native';
 import uuid from "react-native-uuid";
-import { Picker } from '@react-native-picker/picker';
 import { Song, SongSectionName } from '@/types';
 import Toolbar from '@/components/Song/Toolbar';
 import Line from '@/components/Song/Line';
+import Select from '@/components/HTML/Select';
 import React from "react";
 
 export default function SongSection({
@@ -73,25 +73,20 @@ export default function SongSection({
 
 	return (
 		<View style={styles.container}>
-			<Picker
+			<Select
 				selectedValue={section.name}
-				onValueChange={handleSetSectionName}
+				onValueChange={(value) => handleSetSectionName(value as SongSectionName)}
 				style={{
 					height: 40,
 					marginBlockEnd: 20,
 				}}
-			>
-				<Picker.Item label={SongSectionName.Intro} value="intro" />
-				<Picker.Item label={SongSectionName.Verse} value="verse" />
-				<Picker.Item label={SongSectionName.PreChorus} value="pre-chorus" />
-				<Picker.Item label={SongSectionName.Chorus} value="chorus" />
-				<Picker.Item label={SongSectionName.Bridge} value="bridge" />
-				<Picker.Item label={SongSectionName.Solo} value="solo" />
-				<Picker.Item label={SongSectionName.Outro} value="outro" />
-				<Picker.Item label={SongSectionName.Misc} value="misc" />
-			</Picker>
+				options={Object.values(SongSectionName).map((value) => ({
+					label: value,
+					value: value,
+				}))}
+			/>
 
-			<Line/>
+			<Line />
 
 			<Text>{section.section_id}</Text>
 
